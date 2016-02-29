@@ -1,0 +1,41 @@
+#!/usr/bin/perl -w
+######## CMPred #####################
+#        Developed by SARAVANAN VIJAYAKUMAR
+#         Centre for Bioinformatics, Pondicherry University
+#         brsaran@gmail.com
+#         Date: 21-12-2012
+#
+
+use CGI qw(:standard);
+use CGI::Carp qw(fatalsToBrowser);
+
+
+print "Content-type: text/html\n\n";
+
+my $in;
+$in= $ARGV[0];
+@Motif = ('Y[EMV][NVI]','YENP','Y[A-Z][A-Z]P','YDHP','Y[TAS][KRQN][MIVR]','Y[YIV]N[FLIV]','YE[A-Z][VI]','YEE[IV]','YEDP','Y[MILV][A-Z][MILV]','Y[QYV]N[YQF]','Y[A-Z]N','[FY]Y[ETYS]N[ILVPTYS]','YF[A-Z][FPLY]','Y[AEV][YFESNV][PFIH]','YDYV','YDEP','YM[A-Z]M','Y[A-Z][A-Z]M','YMPMS','Y[LIV]E[LIV]','Y[A-Z][A-Z]P','YILV[A-Z][MLIVP]','TIY[A-Z][A-Z][VI]','Y[LV]N[VP]','Y[TVI][A-Z]L','Y[IEYL][A-Z][ILM]','[IVLS][A-Z]Y[A-Z][A-Z][LI]','[VIL][A-Z]YA[A-Z][LV]','[A-Z][A-Z]YYM[KR]','L[YH]Y[MF][A-Z][FM]','L[A-Z]YA[A-Z]L','[IV][A-Z]Y[A-Z][A-Z][LV]','[VIL][A-Z]Y[MLF][A-Z]P','[TVIY][A-Z]Y[ASTV][A-Z][IVL]','[ILV][ILV][ILVFTY]Y[TILV][IL][ILVP]','[HF][A-Z]V[A-Z][TSA]Y','[IVL][A-Z]Y[FM][A-Z]P','Y[IV][A-Z][IV]','[ILVM][A-Z]Y[TVA][A-Z][IVLF]','[IV][A-Z]Y[LMT]Y[APT]SG','W[MTV]Y[YR][IL][A-Z]','YIPP','YM[A-Z]M','Y[RKHQED][RKHQED][IP]','PP[A-Z]Y','YEEI','Y[DE][PR][RPQ]','Y[A-Z][A-Z]Q','Y[MLVIF][PRKH]Q','Y[QTE][EQ][LI]','YTT[ILM]','[DE][A-Z][A-Z][A-Z][A-Z][A-Z][A-Z][A-Z][DE][A-Z][A-Z]Y[A-Z][A-Z]L[A-Z][A-Z][A-Z][A-Z][A-Z][A-Z][A-Z]Y[A-Z][A-Z][LI]','YEN[FIV]','Y[MLE]EP','YESP','D[ND][A-Z]Y','N[A-Z]LY','N[A-Z][A-Z]Y','NP[A-Z]Y','DD[A-Z]Y','NP[A-Z]YF[A-Z]R','HN[MLVI][MLVIN]NP[ST]Y');
+@Motif_name = ('13BP2 SH2 domain binding motif','Abl SH2 domain binding motif','Crk SH2 domain binding motif ','Crk SH2 domain binding motif ','Csk SH2 domain binding motif ','Grb2 SH2 domain binding motif ','Fes SH2 domain binding motif ','Fgr SH2 domain binding motif ','Fyn SH2 domain binding motif ','GRB2, 3BP2, Csk, Fes, Syk C-terminal SH2 domain binding motif','Grb2 SH2 domain binding motif','Grb2 SH2 domain binding motif','GRB7, GRB10 SH2 domain binding motif','HCP SH2 domain binding motif','Itk SH2 domain binding motif','Lck and Src SH2 domain binding motif ','Nck SH2 domain binding motif ','PI3 Kinase p85 SH2 domain binding motif ','PI3 Kinase p85 SH2 domain binding motif ','PI3 Kinase p85 SH2 domain binding motif ','PLCgamma C and N-terminal SH2 domain binding motif ','RasGAP C-terminal SH2 domain binding motif ','RasGAP N-terminal SH2 domain binding motif ','SAP and EAT2 SH2 domain binding motif ','Sem5 SH2 domain binding motif','Shb SH2 domain binding motif ','SHC SH2 domain binding motif ','SHIP2 SH2 domain binding motif','SHP1 C-terminal SH2 domain binding motif','SHP1 C-terminal SH2 domain binding motif','SHP1 N-terminal SH2 domain binding motif','SHP1 N-terminal SH2 domain binding motif','SHP1 SH2 domain binding motif ','SHP1, SHP2 SH2 domain binding motif ','SHP2 CSH2 domain binding motif','SHP2 C-terminal SH2 domain binding motif','SHP2 N-terminal SH2 domain binding motif','SHP2 N-terminal SH2 domain binding motif','SHP2 N-terminal SH2 domain binding motif','SHP2 N-terminal SH2 domain binding motif','SHP2 N-terminal SH2 domain binding motif','SHP2 N-terminal SH2 domain binding motif','SHP2, PLCgamma SH2 domain binding motifs','Src and Abl SH2 domain binding motif ','Src, Fyn, Lck, Fgr, Abl, Crk, Nck SH2 domain binding motif ','Src, Fyn,Csk, Nck and SHC SH2 domain binding motif ','Src,Lck and Fyn SH2 domains binding motif ','STAT1 SH2 domain binding motif','STAT3 SH2 domain binding motif','STAT3 SH2 domain binding motif','Syk C-terminal SH2 domain binding motif ','Syk N-terminal SH2 domain binding motif ','Syk, ZAP-70, Shc, Lyn SH2 domain binding motif','Tensin SH2 domain binding motif','Vav SH2 domain binding motif ','Vav SH2 domain binding motif ','Cbl PTB domain binding motif ','Dok1 PTB domain binding motif','FRIP PTB domain binding motif ','Shc PTB domain binding motif','Shb PTB domain binding motif ','ShcA PTB domain binding motif ','ShcC PTB domain binding motif');
+$k=0;
+$in=~s/\s//g;
+
+$Jack = "<HTML>Tyrosine Phosphorylation binding sites:<br><table border='1'><tr><td><font color='blue'><b>S.No</td><td><font color='blue'><b>Position</td><td><font color='blue'><b>Motif</td><td><font color='blue'><b>Feature of the Motif</td></font></tr>";
+for($i=0;$i<@Motif;$i++){
+     if($in=~m/($Motif[$i])/g){
+	#$in=~m/($Motif[$i])/g;
+         $Jack.= "<tr><td>".($k+1)."</td><td>".($-[0]+1)."-".($+[0]+1)."</td><td>".$1."</td><td>".$Motif_name[$i]."</td></tr>";
+         $k++;
+     }
+}
+
+print $Jack."</table>";
+print "<br><br><font color = 'red'>Click <a href = 'http://www.hprd.org/tyrosine_motifs'> here</a> for list of motif.";
+
+
+
+
+
+
+
+
+
